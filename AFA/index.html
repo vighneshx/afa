@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Super Human Research | AFA Algae Science</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <style>
+      body {
+        background-color: #f2f9f0;
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Navbar Styling */
+      .navbar {
+        background-color: #839788;
+        opacity: 0.9;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .navbar a {
+        color: white !important;
+      }
+
+      .navbar-toggler {
+        border-color: white;
+      }
+
+      .navbar .nav-item {
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+      }
+
+      .navbar .nav-item:hover {
+        opacity: 1;
+      }
+
+      /* Smooth Scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Text Color and Styling */
+      h1,
+      h2,
+      h3 {
+        color: #ffffff;
+      }
+
+      .section-title {
+        color: #839788;
+        font-weight: bold;
+        font-size: 2rem;
+      }
+
+      /* Banner Section */
+      .animation-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-image: url("banner.jpg"); /* Use your algae image */
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+        padding: 0 10px;
+      }
+
+      .intro-text {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 1.6;
+      }
+
+      .button {
+        background-color: #839788;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .button:hover {
+        background-color: #4a5e4a;
+      }
+
+      /* Lab Journal Section Styling */
+      .journal-section {
+        margin-top: 50px;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 50px;
+      }
+
+      .journal-heading {
+        font-size: 1.8rem;
+        color: #4a5e4a;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .journal-paragraph {
+        font-size: 1.1rem;
+        color: #495057;
+        line-height: 1.7;
+      }
+
+      .journal-table {
+        border: 1px solid #839788;
+        margin: 20px 0;
+        padding: 10px;
+        width: 100%;
+        background-color: #f2f9f0;
+        border-radius: 8px;
+      }
+
+      .journal-table th,
+      .journal-table td {
+        padding: 10px;
+        border: 1px solid #839788;
+        text-align: center;
+      }
+
+      /* Card Styling for Sections */
+      .card {
+        border: 1px solid #839788;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+      }
+
+      .card-body {
+        padding: 30px;
+      }
+
+      .card-title {
+        color: #839788;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .card-text {
+        color: #495057;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #839788;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      /* Contact Form */
+      #contact {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+
+      .form-control {
+        background-color: #f2f9f0;
+        border: 1px solid #839788;
+        border-radius: 8px;
+        padding: 15px;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: #4a5e4a;
+        box-shadow: 0 0 8px rgba(131, 151, 136, 0.7);
+      }
+
+      .btn-submit {
+        background-color: #839788;
+        color: white;
+        padding: 15px;
+        font-size: 18px;
+        border-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-submit:hover {
+        background-color: #4a5e4a;
+        transform: translateY(-5px);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .intro-text h1 {
+          font-size: 2rem;
+        }
+
+        .section-title {
+          font-size: 1.5rem;
+        }
+
+        .button {
+          font-size: 16px;
+          padding: 12px 20px;
+        }
+
+        .journal-heading {
+          font-size: 1.5rem;
+        }
+
+        .card-body {
+          padding: 20px;
+        }
+
+        .journal-table th,
+        .journal-table td {
+          padding: 8px;
+          font-size: 0.9rem;
+        }
+
+        .navbar-nav {
+          text-align: center;
+        }
+
+        .navbar-nav .nav-item {
+          margin-bottom: 10px;
+        }
+
+        .navbar-nav .nav-link {
+          font-size: 1.1rem;
+        }
+      }
+
+      /* Adjust layout for larger screens */
+      @media (min-width: 769px) {
+        .animation-wrapper {
+          height: 80vh;
+        }
+
+        .intro-text h1 {
+          font-size: 3rem;
+        }
+
+        .card-columns {
+          column-count: 3;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <a class="navbar-brand" href="#">Elixir of Evolution</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#research">Research</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#journal">Lab Journal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="animation-wrapper">
+      <div class="text-center intro-text">
+        <h1>Welcome to AFA Algae Research</h1>
+        <p>
+          I am Vighnesh, a biomedical scientist with a passion for unlocking the
+          potential of AFA algae. Join me on my journey to enhance human health
+          and performance through groundbreaking research.
+        </p>
+        <button class="button" onclick="scrollToResearch()">
+          Explore My Research
+        </button>
+      </div>
+    </section>
+
+    <!-- Lab Journal Section -->
+    <section id="journal" class="container py-5">
+      <div class="journal-section">
+        <h2 class="section-title text-center">
+          Lab Journal: Evolution of Human Superiority through AFA
+        </h2>
+        <div class="journal-paragraph">
+          <p>
+            <strong>Objective:</strong> The aim of this scientific experiment is
+            to study the effects of Aphanizomenon flos-aquae (AFA), a blue-green
+            algae, on the regeneration capacity of the human body and how it can
+            stimulate internal biological systems such as the immune system,
+            nervous system, and stem cell activity to reach a state of optimal
+            health and human superiority. By integrating AFA into the diet, we
+            aim to enhance cellular, tissue, and organ regeneration, strengthen
+            cognitive functions, improve mental clarity, physical strength, and
+            slow down the aging process.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">
+              Phase 1: Mechanisms of AFA and Its Impact on Biological Systems
+            </h5>
+            <p class="card-text">
+              AFA contains a broad range of bioactive substances that directly
+              affect cellular processes like stem cell activation,
+              anti-inflammatory responses, and antioxidant protection. In this
+              experiment, we will dissect AFA based on its bioactive components
+              and the specific mechanisms that lead to the desired
+              transformation of the human body into a superior biological state.
+            </p>
+          </div>
+        </div>
+
+        <!-- Table of Components -->
+        <div class="journal-table">
+          <h5 class="card-title text-center">Bioactive Components of AFA</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Function</th>
+                <th>Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Polysaccharides</td>
+                <td>
+                  Stimulates stem cell mobilization and immune system activation
+                </td>
+                <td>
+                  Accelerates tissue regeneration, strengthens muscles, and
+                  enhances cognitive functions
+                </td>
+              </tr>
+              <tr>
+                <td>Antioxidants</td>
+                <td>
+                  Reduces oxidative stress and promotes stem cell proliferation
+                </td>
+                <td>
+                  Delays aging, improves cognitive clarity, and boosts physical
+                  vitality
+                </td>
+              </tr>
+              <tr>
+                <td>Omega-3 Fatty Acids</td>
+                <td>Repairs cell structures and promotes neurogenesis</td>
+                <td>Improves memory, focus, and cognitive performance</td>
+              </tr>
+              <tr>
+                <td>Phospholipids</td>
+                <td>Optimizes cell communication and gene expression</td>
+                <td>Supports cell regeneration and slows down aging</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container py-5">
+      <h2 class="section-title text-center">Get in Touch</h2>
+      <p class="text-center mb-5">
+        Feel free to reach out if you have any questions or would like to
+        collaborate on research opportunities.
+      </p>
+      <form action="#" method="post">
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Your Name"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Your Email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            placeholder="Your Message"
+            rows="4"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 Vighnesh Lachman. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap and jQuery JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Smooth Scroll Function -->
+    <script>
+      function scrollToResearch() {
+        document
+          .getElementById("research")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>
